@@ -46,10 +46,12 @@ public class RestData {
 		int death = 0;
 		int recovered = 0;
 		Gson gson = new Gson();
-        
-		if (call.getBody()!=null) {
 		
-			Pais[] estados = gson.fromJson(call.getBody().toLowerCase(), Pais[].class);
+		String llamada = call.getBody();
+        
+		if (llamada != null) {
+		
+			Pais[] estados = gson.fromJson(llamada.toLowerCase(), Pais[].class);
 	
 	        for(Pais estado : estados) {
 	        	response.setDate(estado.getDate());
@@ -90,9 +92,11 @@ public class RestData {
 	    Mundial response = new Mundial();
 		Gson gson = new Gson();
 		
-		if (call.getBody()!=null) {
+		String llamada = call.getBody();
+        
+		if (llamada != null) {
 		
-	        Mundial estado = gson.fromJson(call.getBody().toLowerCase(), Mundial.class);
+	        Mundial estado = gson.fromJson(llamada.toLowerCase(), Mundial.class);
 	        
 	        response.setTotalConfirmed(estado.getTotalConfirmed());
 	        response.setTotalDeaths(estado.getTotalDeaths());
