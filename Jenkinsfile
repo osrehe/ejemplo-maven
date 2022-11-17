@@ -132,54 +132,7 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Run Jar'){
-            steps{
-                echo 'Running Jar...'
-                slackSend color: "warning", message: "Running Jar..."
-                sh 'nohup java -jar ./DevOpsUsach2020-0.0.1.jar&'
-            }
-            post {
-                success {
-                    echo 'Run Success'
-                    slackSend color: "good", message: "Run Success"
-                }
-                failure {
-                    echo 'Run Failed'
-                    slackSend color: "danger", message: "Run Failed"
-                }
-            }
-        }
-        stage('sleep'){
-            steps{
-                echo 'Sleeping...'
-                sleep time: 10, unit: 'SECONDS'
-                sh 'ps -ef | grep java'
-            }
-        }
-        stage('CURL Localhost:8081'){
-            steps{
-                sh 'sleep 10'
-                echo 'CURL...'
-                slackSend color: "warning", message: "CURL..."
-                // sh 'curl -I GET http://localhost:8081/rest/mscovid/test?msg=testing > response.txt'
-                sh 'curl -s -o /dev/null/ -w \"%{http_code}\" http://localhost:8081/rest/mscovid/test?msg=testing > response.txt'
-                // responseStatus = sh(script: 'cat response.txt | grep HTTP/1.1 | cut -d " " -f2', returnStdout: true).trim()
-                // script{
-                //     responseStatus = sh'curl -s -o /dev/null/ -w \"%{http_code}\n\" http://localhost:8081/rest/mscovid/test?msg=testing > response.txt'
-                // }
-
-            }
-            post {
-                success {
-                    echo 'CURL Success'
-                    slackSend color: "good", message: "CURL Success + ${responseStatus}"
-                }
-                failure {
-                    echo 'CURL Failed'
-                    slackSend color: "danger", message: "CURL Failed"
-                }
-            }
-        }
+      
         //updaload nexus jar
         // stage('Upload jar to nexus')
         // {
