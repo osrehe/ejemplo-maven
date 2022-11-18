@@ -1,4 +1,4 @@
-def responseStatus = ''
+//def responseStatus = ''
 
 pipeline {
     agent any
