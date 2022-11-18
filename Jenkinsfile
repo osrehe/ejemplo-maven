@@ -9,7 +9,8 @@ pipeline {
         }
         stage ('clean'){
             steps{
-                cleanWs()
+                //cleanWs()
+                echo 'Clean'
             }
         }
     }
